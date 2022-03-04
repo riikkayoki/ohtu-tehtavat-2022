@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "poetry"
+name = "ohtu-2022"
 version = "0.1.0"
 description = ""
 authors = ["riikkayoki <74421508+riikkayoki@users.noreply.github.com>"]
