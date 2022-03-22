@@ -4,17 +4,16 @@ import sys, pdb
 class UserInputError(Exception):
     pass
 
+
 class AuthenticationError(Exception):
     pass
+
 
 class UserService:
     def __init__(self, user_repository):
         self._user_repository = user_repository
 
     def check_credentials(self, username, password):
-        # pysäytetään ohjelman suoritus tälle riville
-        #pdb.Pdb(stdout=sys.__stdout__).set_trace()
-
         if not username or not password:
             raise UserInputError("Username and password are required")
 
@@ -27,7 +26,7 @@ class UserService:
 
     def create_user(self, username, password):
         self.validate(username, password)
-
+        
         user = self._user_repository.create(
             User(username, password)
         )
@@ -38,14 +37,17 @@ class UserService:
         if not username or not password:
             raise UserInputError("Username and password are required")
 
-        if username in self._user_repository.find_by_username(username):
-            raise UserInputError(f"Username {username} already exists")
+        users = self._user_repository.find_all()
+
+        for user in users:
+            if user.username == username:
+                raise UserInputError("Username already exists")
 
         if len(username) <= 3:
-            raise UserInputError(f"Username is too short, minimum length is 3")
+            raise UserInputError("Username is too short")
 
-        if len(password) <= 3:
-            raise UserInputError(f"Password is too short, minimum length is 8")
+        if len(password) <= 8:
+            raise UserInputError("Password is too short")
 
         if password.isalpha():
             raise UserInputError("Password must contain at least one number")

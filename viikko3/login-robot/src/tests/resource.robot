@@ -11,6 +11,5 @@ Input Credentials
     Input  ${password}
     Run Application
 
-Input New Command
-    Input new
-
+Input New command
+    Input  new
