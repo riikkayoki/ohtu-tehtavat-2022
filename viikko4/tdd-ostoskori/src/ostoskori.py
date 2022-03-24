@@ -33,7 +33,10 @@ class Ostoskori:
         self._maara -= 1
 
     def tyhjenna(self):
-        self.ostoskori = {}
+        self._ostoskori.clear()
+        self._ostoslista.clear()
+        self._maara = 0
+        self._hinta = 0
 
     def ostokset(self):
         for ostos in self._ostoskori.values():
