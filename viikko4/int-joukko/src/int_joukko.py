@@ -3,8 +3,10 @@ OLETUSKASVATUS = 5
 
 
 class IntJoukko:
-    def __init__(self, kapasiteetti=None, kasvatuskoko=None):
-        self.lukujono = []
+    def __init__(self, kapasiteetti=OLETUSKAPASITEETTI, kasvatuskoko=OLETUSKASVATUS):
+        self.kasvatuskoko = kasvatuskoko
+        self.kapasiteetti = kapasiteetti
+        self.lukujono = [0] * self.kapasiteetti
         self.alkioiden_lkm = 0
 
     def kuuluuko_joukkoon(self, n):
@@ -15,16 +17,19 @@ class IntJoukko:
 
     def lisaa_alkio(self, n):
 
-        if self.kuuluuko_joukkoon(n):
-            return False
-        self.lukujono.append(n)
-        return True
+        if not self.kuuluuko_joukkoon(n):
+            if self.alkioiden_lkm == len(self.lukujono):
+                self.lukujono = self.lukujono + [0] * self.kasvatuskoko
+            self.lukujono[self.alkioiden_lkm] = n
+            self.alkioiden_lkm = self.alkioiden_lkm + 1
+            return True
+        return False
 
     def poista_alkio(self, n):
-        for alkio in self.lukujono:
-            if alkio == n:
-                self.lukujono.remove(alkio)
-                return True
+        if self.kuuluuko_joukkoon(n):
+            self.lukujono.remove(n)
+            self.alkioiden_lkm -= 1
+            return True
         return False
 
     def kopioi_taulukko(self, a, b):
@@ -32,7 +37,7 @@ class IntJoukko:
             b[alkio] = a[alkio]
 
     def palauta_alkioiden_lkm(self):
-        return len(self.lukujono)
+        return self.alkioiden_lkm
 
     def muuta_lukujonoksi(self):
         return [alkio for alkio in self.lukujono if alkio != 0]
