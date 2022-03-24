@@ -6,6 +6,7 @@ class IntJoukko:
     def __init__(self, kapasiteetti=OLETUSKAPASITEETTI, kasvatuskoko=OLETUSKASVATUS):
         self.kasvatuskoko = kasvatuskoko
         self.kapasiteetti = kapasiteetti
+        
         self.lukujono = [0] * self.kapasiteetti
         self.alkioiden_lkm = 0
 
