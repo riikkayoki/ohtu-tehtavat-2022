@@ -59,6 +59,7 @@ class IntJoukko:
     @staticmethod
     def leikkaus(a, b):
         joukko = IntJoukko()
+
         a_taulu = a.muuta_lukujonoksi()
         b_taulu = b.muuta_lukujonoksi()
 
@@ -71,7 +72,7 @@ class IntJoukko:
     @staticmethod
     def erotus(a, b):
         joukko = IntJoukko()
-        
+
         a_taulu = a.muuta_lukujonoksi()
         b_taulu = b.muuta_lukujonoksi()
 
